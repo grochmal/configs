@@ -1,0 +1,17 @@
+# encrypted file systems
+*.tomb
+
+# encryption keys
+*.asc
+*.pem
+
+# personal files shall not be included by default
+rc/README.md
+rc/abook/addressbook
+rc/abook/addressbook~
+rc/bash_personal
+rc/fetchmail
+rc/mutt-alias
+rc/muttrc
+rc/procmai
+

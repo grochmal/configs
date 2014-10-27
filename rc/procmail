@@ -1,0 +1,20 @@
+# .procmail - filters email into different inboxes
+SHELL=/bin/sh
+MAILDIR=$HOME/mail
+DEFAULT=my-inbox
+LOGFILE=$MAILDIR/procmail.log
+
+# email from the job
+:0:
+* ^To: .*me@university.ac.uk
+job-inbox
+
+# better not miss those
+:0:
+* (^From:|^Cc:) .*girlfriend@example.com
+date-inbox
+
+# all the rest goes to the personal inbox
+:0:
+${DEFAULT}
+

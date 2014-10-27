@@ -1,0 +1,17 @@
+# .fetchmail - retrieve mail from other servers
+
+defaults
+  timeout 12
+
+# several gmail accounts
+poll pop.gmail.com service 995 protocol pop3:
+  username "work@gmail.com" is "grochmal"
+  password "a1a1a1" ssl
+  username "personal@gmail.com" is "grochmal"
+  password "c1c1c1" ssl
+
+# work email
+poll mail.qmul.ac.uk protocol imap
+  username "user" is "grochmal"
+  password "a1a1a1" ssl
+

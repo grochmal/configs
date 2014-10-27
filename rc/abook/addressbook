@@ -1,0 +1,22 @@
+# abook addressbook file
+
+[format]
+program=abook
+version=0.6.0pre2
+
+
+[0]
+name=Some Dude
+email=some.dude@qmul.ac.uk
+nick=uk-qmul-dude
+
+[1]
+name=Another Dude
+email=anther.dude@hotmail.com
+nick=party-some-dude
+
+[2]
+name=Some Girl
+email=some.girl@gmail.com
+nick=party-some-girl
+

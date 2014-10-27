@@ -1,0 +1,5 @@
+# Sensitive variables in shell config
+
+export MAIL=$HOME/mail/my-inbox
+export EMAIL=me@example.com
+

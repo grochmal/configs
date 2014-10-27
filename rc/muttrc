@@ -1,0 +1,32 @@
+# .muttrc - mail reader configuation
+
+# these are taken from the environment
+#set from = me@example.com            # $EMAIL
+#set spoolfile = $HOME/mail/my-inbox  # $MAIL
+
+set sendmail     = "/usr/sbin/sendmail -oem -oi -f $EMAIL"
+set edit_headers = yes
+set realname     = Myself
+set hostname     = example.com
+#set read_only    = yes
+
+set folder    = $HOME/mail
+set record    = +sent
+set copy      = yes
+#set mbox      = +mbox
+set move      = ask-no
+set postponed = +postponed
+
+set mark_old     = yes
+set mbox_type    = mbox
+set send_charset = us-ascii:utf-8:iso-8859-1
+set signature    = $HOME/.signature
+set smart_wrap   = yes
+
+set alias_file    = $HOME/rc/rc/mutt-alias
+set sort_alias    = alias
+source $HOME/rc/rc/mutt-alias
+set query_command = "abook --mutt-query '%s'"
+macro index,pager A "<pipe-message>abook --add-email-quiet<return>" \
+                    "add the sender address to abook
+
