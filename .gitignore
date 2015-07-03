@@ -1,3 +1,6 @@
+# vim
+*.swp
+
 # encrypted file systems
 *.tomb
 
@@ -5,13 +8,7 @@
 *.asc
 *.pem
 
-# personal files shall not be included by default
-rc/README.md
-rc/abook/addressbook
-rc/abook/addressbook~
-rc/bash_personal
-rc/fetchmail
-rc/mutt-alias
-rc/muttrc
-rc/procmai
+# personal files shall not be included,
+# use the Makefile to point between `sec/` and `pub/`
+secrc/
 

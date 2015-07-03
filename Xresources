@@ -1,0 +1,98 @@
+! just in case
+Xft.dpi:        96
+Xft.antialias:  true
+Xft.rgba:       rgb
+Xft.hinting:    true
+Xft.hintstyle:  hintslight
+Xcursor.size:   32
+Xcursor.theme:  dmz-aa
+
+! urxvt
+URxvt*geometry:     80x32
+URxvt*depth:        32
+URxvt*cursorColor:  #eeeeee
+URxvt*foreground:   rgb:ffef/ffef/ffef
+URxvt*background:   rgb:0000/0000/0000
+URxvt*.transparent:  true
+URxvt*.shading:      20
+!URxvt.letterSpace:  -1
+URxvt*font:         xft:terminus:size=14:antialias=false
+!URxvt*font:         xft:dejavu sans mono:size=12:antialias=true
+!URxvt*font:         xft:liberation mono:size=12:antialias=true
+URxvt*scrollBar:          true
+URxvt*scrollBar_right:    true
+URxvt*scrollstyle:        plain
+URxvt*scrollColor:        #323232
+URxvt*scrollTtyOutput:    false
+! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
+URxvt*scrollWithBuffer:   true
+URxvt*scrollTtyKeypress:  true
+! do not scroll in secondary screen (e.g. less)
+URxvt.secondaryScreen:    true
+URxvt.secondaryScroll:    false
+URxvt.perl-ext-common:  default,matcher
+URxvt.url-launcher:     /usr/bin/firefox
+!URxvt.url-launcher:     /usr/bin/surf
+URxvt.matcher.button:   1
+!URxvt.iconFile:         /usr/share/icons/gnome/scalable/apps/terminal.svg
+
+! colourful man pages
+URxvt.colorIT:  #87af5f
+URxvt.colorBD:  #d7d7d7
+URxvt.colorUL:  #87afd7
+
+!black
+*color0:   #000000
+*color8:   #4c4c4c
+!red
+*color1:   #cd1616
+*color9:   #ff3232
+!green
+*color2:   #16cd16
+*color10:  #32ff32
+!yellow
+*color3:   #cdcd16
+*color11:  #ffff32
+!blue
+*color4:   #3232ff
+*color12:  #6464ff
+!magenta
+*color5:   #cd16cd
+*color13:  #ff32ff
+!cyan
+*color6:   #16cdcd
+*color14:  #32ffff
+!white
+*color7:   #e5e5e5
+*color15:  #ffffff
+
+! xscreensaver
+xscreensaver.timeout:        0:12:00
+xscreensaver.cycle:          0:06:00
+xscreensaver.lockTimeout:    0:01:00
+xscreensaver.passwdTimeout:  0:00:30
+xscreensaver.dpmsEnabled:          False
+xscreensaver.dpmsQuickoffEnabled:  False
+xscreensaver.dpmsStandby:          2:00:00
+xscreensaver.dpmsSuspend:          2:00:00
+xscreensaver.dpmsOff:              4:00:00
+xscreensaver.grabDesktopImages:   False
+xscreensaver.grabVideoFrames:     False
+xscreensaver.chooseRandomImages:  False
+xscreensaver.mode:            random
+xscreensaver.imageDirectory:  /usr/share/archlinux/wallpaper
+xscreensaver.nice:            18
+xscreensaver.lock:            True
+xscreensaver.timestamp:       True
+xscreensaver.fade:            True
+xscreensaver.unfade:          False
+xscreensaver.fadeSeconds:     0:00:03
+xscreensaver.fadeTicks:       20
+xscreensaver.splash:          False
+xscreensaver.splashDuration:  0:00:05
+xscreensaver.textMode:     program
+xscreensaver.textLiteral:  XScreenSaver
+xscreensaver.textFile:     /home/grochmal/.signature
+xscreensaver.textProgram:  fortune
+xscreensaver.textURL:      http://grochmal.org
+

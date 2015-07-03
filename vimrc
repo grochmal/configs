@@ -14,7 +14,7 @@ set incsearch
 "set smartcase
 "set autowrite
 
-set listchars=eol:$,tab:@>,trail:%
+set listchars=eol:\|,tab:@>,trail:%
 set list
 set laststatus=2
 
