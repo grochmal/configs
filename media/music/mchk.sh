@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Prints the duration of the MP3, WAV and OGG files after conversion.
+# Distinct durations between files normally mean frankenstein tracks.
+
 check () {
     if test -f "$1"
     then
