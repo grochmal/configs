@@ -77,7 +77,7 @@ information in the song names.  One way to do it is with a directory structure
 as follows
 
     artist/
-         release-year~album/
+        release-year~album/
             track-number~song-title~metadata.ogg
 
 Common metadata is, for example, "live" meaning that the song was recorded on a
