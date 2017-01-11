@@ -1,0 +1,12 @@
+# conifg for ssh
+
+# prevent firewall timeouts
+ServerAliveInterval 30
+ServerAliveCountMax  2
+
+# typical server config
+Host server
+    HostName     server.grochmal.org
+    User         grochmal
+    IdentityFile ~/.ssh/grochmal-haps2server.pem
+

@@ -1,3 +1,6 @@
+# .muttrc/.mutt-alias - email aliases for mutt
+
 alias uk-qmul-dude Some Dude <some.dude@qmul.ac.uk>
 alias party-some-dude Another Dude <anther.dude@hotmail.com>
 alias party-some-girl Some Girl <some.girl@gmail.com>
+

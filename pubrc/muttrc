@@ -7,7 +7,7 @@
 set sendmail     = "/usr/sbin/sendmail -oem -oi -f $EMAIL"
 set edit_headers = yes
 set realname     = Myself
-set hostname     = example.com
+set hostname     = "example.com"
 #set read_only    = yes
 
 set folder    = $HOME/mail
@@ -20,10 +20,10 @@ set postponed = +postponed
 set mark_old     = yes
 set mbox_type    = mbox
 set send_charset = us-ascii:utf-8:iso-8859-1
-set signature    = $HOME/.signature
+set signature    = $HOME/.siggrochmal
 set smart_wrap   = yes
 
-set alias_file    = $HOME/rc/rc/mutt-alias
+set alias_file    = $HOME/.mutt-alias
 set sort_alias    = alias
 source $HOME/rc/rc/mutt-alias
 set query_command = "abook --mutt-query '%s'"
