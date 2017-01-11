@@ -1,4 +1,4 @@
-# Makefile to create soft links for each configuration file
+# Makefile to create soft links for each configuration file/directory
 
 # The minimum size for a variable (actually command line) according to POSIX is
 # 4096 bytes.  That's about 50 lines of 80 characters each, if we are close to
