@@ -11,7 +11,7 @@ umask 022
 # our own scripts, and scripts used by scripting languages
 export PATH="$HOME/.bin:$HOME/.local/bin:$PATH"
 
-# termcap and manpath should not be used, terminfo and mandb are be better
+# termcap and manpath should not be used, terminfo and mandb are better
 unset TERMCAP
 unset MANPATH
 
@@ -29,7 +29,7 @@ fi
 
 # typical program config
 export EDITOR=vim
-export LESS='-iMSx4 -FX'
+export LESS='-iMSx4 -FXR'
 
 # useful things
 alias 'ls=ls --color=auto'

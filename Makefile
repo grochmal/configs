@@ -3,13 +3,19 @@
 # The minimum size for a variable (actually command line) according to POSIX is
 # 4096 bytes.  That's about 50 lines of 80 characters each, if we are close to
 # that limit we will need to add more rules.
-LINKS = profile bashrc bash_profile
-        #xinitrc xsession Xresources Xmodmap\
-        #vifm xmonad
+LINKS = profile bashrc bash_profile\
+        xinitrc xsession Xresources Xmodmap\
+        bin xmonad weechat
+        # vifm xmobarrc
+# TODO
+XDG   = zathura
 ENC   = procmailrc fetchmailrc muttrc\
         siggrochmal sigvalentine sigwork\
         abook ssh
-HIST  = bash_history lesshst viminfo
+HIST  = bash_history lesshst viminfo\
+        wget-hsts
+# TODO
+XDGHS = pavucontrol.ini
 
 all: pub links
 
@@ -21,18 +27,26 @@ sec:
 
 links:
 	for link in $(LINKS); do \
-	    echo ln -fs ~/rc/$${link} ~/.$${link}; \
-	    ln -fs ~/rc/$${link} ~/.$${link}; \
+	    echo ln -fns ~/rc/$${link} ~/.$${link}; \
+	    ln -fns ~/rc/$${link} ~/.$${link}; \
 	done
 	for enc in $(ENC); do \
-	    echo ln -fs ~/rc/rc/$${enc} ~/.$${enc}; \
-	    ln -fs ~/rc/rc/$${enc} ~/.$${enc}; \
+	    echo ln -fns ~/rc/rc/$${enc} ~/.$${enc}; \
+	    ln -fns ~/rc/rc/$${enc} ~/.$${enc}; \
 	done
+	if ! test -d ~/.config; then \
+	    echo mkdir ~/.config; \
+	    mkdir ~/.config; \
+	fi
+#	for xdg in $(XDG); do \
+#	    echo ln -fns ~/rc/$${xdg} ~/.config/$${xdg}; \
+#	    ln -fns ~/rc/$${xdg} ~/.config/$${xdg}; \
+#	done
 
 ssd:
 	for hist in $(HIST); do \
-	    echo ln -fs /dev/null ~/.$${hist}; \
-	    ln -fs /dev/null ~/.$${hist}; \
+	    echo ln -fns /dev/null ~/.$${hist}; \
+	    ln -fns /dev/null ~/.$${hist}; \
 	done
 
 clean:

@@ -13,3 +13,17 @@
 /secrc/
 /rc
 
+# xmonad cache
+/xmonad/xmonad.errors
+/xmonad/xmonad.hi
+/xmonad/xmonad.o
+/xmonad/xmonad-*-linux
+
+# vifm cache
+/vifm/vifminfo*
+
+# weechat cache
+/weechat/weechat_fifo_*
+/weechat/weechat.log
+/weechat/logs
+

@@ -1,3 +1,5 @@
+! ~/.Xresources - configuration available to Xorg clients
+
 ! just in case
 Xft.dpi:        96
 Xft.antialias:  true

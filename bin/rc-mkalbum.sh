@@ -1,0 +1,1 @@
+../media/pics/mkalbum.sh

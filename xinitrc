@@ -1,26 +1,37 @@
 #!/bin/sh
 #
-# ~/.xinitrc
+# ~/.xinitrc - must be executable (permissions)
 #
 # Executed by startx (run your window manager from here)
 
+# check if the OS already have some scripts for us
 if test -d /etc/X11/xinit/xinitrc.d
 then
     for f in /etc/X11/xinit/xinitrc.d/*
     do
-        [ -x "$f" ] && source "$f"
+        test -x "$f" && source "$f"
     done
     unset f
 fi
 
-# uk keyboard
-setxkbmap gb
+# set the keyboard map (gb is uk)
+#setxkbmap gb
+setxkbmap us
 
-# mouse pointer for xmonad (xdm already does this)
+# we have a map so we can add xorg configuration in
+if test -r "$HOME/.Xresources"
+then
+    xrdb "$HOME/.Xresources"
+fi
+if test -r "$HOME/.Xmodmap"
+then
+    xmodmap "$HOME/.Xmodmap"
+fi
+
+# mouse pointer for xmonad (xdm already does this for us)
 #xsetroot -cursor_name left_ptr
 
-# most of our configuretion
-xrdb .Xresources
+# most of our configuration
 xscreensaver -no-splash &
 
 # urxvt has native transparency so we do not need this
@@ -30,7 +41,12 @@ xscreensaver -no-splash &
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 # set the background (again, because qiv uses a different buffer)
-/usr/bin/feh --bg-scale --no-fehbg -z /usr/share/archlinux/wallpaper/a*.jpg
+feh=`which feh 2>/dev/null`
+if test "x$feh" != "x" -a  -x "$feh" -a -e /usr/share/archlinux/wallpaper
+then
+    "$feh" --bg-scale --no-fehbg -z /usr/share/archlinux/wallpaper/a*.jpg
+fi
+unset feh
 
 # pulse audio for alsa
 if test -x /usr/bin/start-pulseaudio-x11

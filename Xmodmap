@@ -1,0 +1,6 @@
+! ~/.Xmodmap - extra keyboard mappings for Xorg
+
+! Change CapsLock into Escape
+remove Lock = Caps_Lock
+keycode 66 = Escape
+
