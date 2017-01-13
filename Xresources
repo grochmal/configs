@@ -6,6 +6,8 @@ Xft.antialias:  true
 Xft.rgba:       rgb
 Xft.hinting:    true
 Xft.hintstyle:  hintslight
+!Xft.autohint:   false
+!Xft.lcdfilter:  lcddefault
 Xcursor.size:   32
 Xcursor.theme:  dmz-aa
 
@@ -15,10 +17,16 @@ URxvt*depth:        32
 URxvt*cursorColor:  #eeeeee
 URxvt*foreground:   rgb:ffef/ffef/ffef
 URxvt*background:   rgb:0000/0000/0000
-URxvt*.transparent:  true
-URxvt*.shading:      20
-!URxvt.letterSpace:  -1
-URxvt*font:         xft:terminus:size=14:antialias=false
+URxvt*transparent:  true
+URxvt*shading:      20
+!URxvtletterSpace:   -1
+!URxvt*font:         xft:Terminus:size=14:antialias=false
+!URxvt*font:         xft:Anonymous Pro:antialias=false
+!URxvt*font:         xft:Dina:pixelsize=14:antialias=false
+URxvt*font:         -*-terminus-medium-r-normal-*-*-200-*-*-c-*-*-u
+!URxvt*boldFont:     -*-terminus-bold-r-normal-*-*-200-*-*-c-*-*-u
+!URxvt*boldFont:     xft:Dina:bold:pixelsize=14:antialias=false
+!URxvt*font:         xft:Dina:pixelsize=14:antialias=false
 !URxvt*font:         xft:dejavu sans mono:size=12:antialias=true
 !URxvt*font:         xft:liberation mono:size=12:antialias=true
 URxvt*scrollBar:          true
@@ -73,28 +81,29 @@ xscreensaver.timeout:        0:12:00
 xscreensaver.cycle:          0:06:00
 xscreensaver.lockTimeout:    0:01:00
 xscreensaver.passwdTimeout:  0:00:30
-xscreensaver.dpmsEnabled:          False
-xscreensaver.dpmsQuickoffEnabled:  False
+xscreensaver.dpmsEnabled:          false
+xscreensaver.dpmsQuickoffEnabled:  false
 xscreensaver.dpmsStandby:          2:00:00
 xscreensaver.dpmsSuspend:          2:00:00
 xscreensaver.dpmsOff:              4:00:00
-xscreensaver.grabDesktopImages:   False
-xscreensaver.grabVideoFrames:     False
-xscreensaver.chooseRandomImages:  False
+xscreensaver.grabDesktopImages:   true
+xscreensaver.grabVideoFrames:     false
+xscreensaver.chooseRandomImages:  true
 xscreensaver.mode:            random
 xscreensaver.imageDirectory:  /usr/share/archlinux/wallpaper
 xscreensaver.nice:            18
-xscreensaver.lock:            True
-xscreensaver.timestamp:       True
-xscreensaver.fade:            True
-xscreensaver.unfade:          False
+xscreensaver.lock:            true
+xscreensaver.timestamp:       true
+xscreensaver.fade:            true
+xscreensaver.unfade:          false
 xscreensaver.fadeSeconds:     0:00:03
 xscreensaver.fadeTicks:       20
-xscreensaver.splash:          False
+xscreensaver.splash:          false
 xscreensaver.splashDuration:  0:00:05
 xscreensaver.textMode:     program
 xscreensaver.textLiteral:  XScreenSaver
-xscreensaver.textFile:     /home/grochmal/.signature
+xscreensaver.textFile:     /home/grochmal/.siggrochmal
 xscreensaver.textProgram:  fortune
 xscreensaver.textURL:      http://grochmal.org
+xscreensaver.font:         -*-terminus-medium-r-normal-*-*-200-*-*-c-*-*-u
 
