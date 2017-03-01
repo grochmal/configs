@@ -489,6 +489,15 @@ Therefore a decent way to convert books and papers should be
        -dPDFSETTINGS=/printer -dCompatibilityLevel=1.4 \
        -sOutputFile=out.pdf in.pdf
 
+or simply
+
+    gs -q -dBATCH -dNOPAUSE -sDEVICE=pdfwrite \
+       -dPDFSETTINGS=/ebook -sOutputFile=out.pdf in.pdf
+
+For files that do use the extra PDF functionality.  Adding
+`-dCompatibilityLevel=1.4` makes the file readable to many ebook readers yet it
+may increase the size of a file considerably.
+
 ### Naming convention
 
 Two kinds of publications are often stored as PDF or EPUB: books and papers

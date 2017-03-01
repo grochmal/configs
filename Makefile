@@ -4,9 +4,10 @@
 # 4096 bytes.  That's about 50 lines of 80 characters each, if we are close to
 # that limit we will need to add more rules.
 LINKS = profile bashrc bash_profile\
-        xinitrc xsession Xresources Xmodmap\
+        dir_colors mailcap screenrc\
+        xinitrc xsession Xresources Xmodmap xmobarrc\
         bin xmonad weechat
-        # vifm xmobarrc
+        # vifm
 # TODO
 XDG   = zathura
 ENC   = procmailrc fetchmailrc muttrc\

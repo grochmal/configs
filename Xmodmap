@@ -1,4 +1,5 @@
 ! ~/.Xmodmap - extra keyboard mappings for Xorg
+!    vim: set ft=xmodmap:
 
 ! Change CapsLock into Escape
 remove Lock = Caps_Lock

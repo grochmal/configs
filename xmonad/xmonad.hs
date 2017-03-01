@@ -32,23 +32,29 @@ main = do
       , handleEventHook    = handleEventHook DefConfig.def <+> docksEventHook
       , logHook            = dynamicLogWithPP xmobarPP
           { ppOutput          = hPutStrLn xmproc
-          , ppTitle           = xmobarColor "darkgreen"  "" . shorten 20
-          , ppCurrent         = xmobarColor "#336433" "" . wrap "[" "]"
-          , ppHiddenNoWindows = xmobarColor "grey" ""
+          , ppTitle           = xmobarColor "lime"  "" . shorten 20
+          , ppCurrent         = xmobarColor "aquamarine" "" . wrap "[" "]"
+          , ppHiddenNoWindows = xmobarColor "slateblue" ""
           , ppLayout          = shorten 6
           , ppVisible         = wrap "(" ")"
-          , ppUrgent          = xmobarColor "red" "yellow"
+          , ppUrgent          = xmobarColor "fuchsia" "gold"
           }
       , startupHook        = setWMName "LG3D"
       } `additionalKeys`
-      [ ((mod4Mask .|. shiftMask, xK_z) , spawn "xscreensaver-command -lock")
+      [ ((mod4Mask .|. shiftMask, xK_z) , spawn screenLock)
+      , ((controlMask, xK_q)            , spawn gVim)
       , ((controlMask, xK_Print)        , spawn scrotWindow)
       , ((0, xK_Print)                  , spawn scrotFullscreen)
-      , ((mod4Mask, xK_b), sendMessage ToggleStruts)
+      , ((mod4Mask, xK_p)               , spawn myDmenu)
+      , ((mod4Mask, xK_b)               , sendMessage ToggleStruts)
       ]
 
 scrotWindow     = "sleep 1; scrot -s ~/%Y-%m-%s-%T-screenshot.png"
 scrotFullscreen = "scrot ~/%Y-%m-%d-%T-screenshot.png"
+screenLock      = "xscreensaver-command -lock"
+gVim            = "gvim"
+-- change the Xmonad default font for dmenu
+myDmenu         = "dmenu_run -fn Dina:size=9"
 
 myworkspaces = [ "code"
                , "web"

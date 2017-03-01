@@ -27,12 +27,19 @@ then
     export TERM=rxvt-unicode
 fi
 
+# use dir_colors for ls
+if test -r "$HOME/.dir_colors"
+then
+    eval `dircolors --bourne-shell "$HOME/.dir_colors"`
+fi
+
 # typical program config
 export EDITOR=vim
 export LESS='-iMSx4 -FXR'
 
 # useful things
 alias 'ls=ls --color=auto'
+alias 'rmpy=find . -depth -type d -name __pycache__ -exec rm -rf {} \;'
 
 # metasploit (favourite place for the db config)
 export MSF_DATABASE_CONFIG=/opt/metasploit/config/database.yml

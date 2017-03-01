@@ -48,6 +48,12 @@ then
 fi
 unset feh
 
+ibusd=`which ibus-daemon 2>/dev/null`
+if test "x$ibusd" != "x" -a -x "$ibusd"
+then
+    "$ibusd" --daemonize --xim --desktop=xmonad
+fi
+
 # pulse audio for alsa
 if test -x /usr/bin/start-pulseaudio-x11
 then

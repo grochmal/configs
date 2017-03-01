@@ -1,0 +1,190 @@
+# ~/.screenrc - gnu screen configuration
+#     vim: set ft=screen:
+# A lot of it has been collected from different sourced and then tweaked.
+# Since termcap is not used anymore by almost any system it is likely that the
+# termcap tweaks do not work anymore.  Some terminfo tweaks may not work
+# anymore as well, and may need some extra tweaking.
+
+# you can set a reattach password (screen will ask for it upon start)
+# password
+
+# to make a demonstration screen use `multiuser on` and `aclchg`,
+# unfortunately i can't make `aclumask` work right
+#multiuser on
+#aclumask ?-wx
+#aclchg user -wx "#?"
+#writelock on
+
+# most terminals today are capable of this
+defautonuke off
+defbce off
+defc1 off
+defflow auto
+defgr off
+deflogin on
+defobuflimit 4096
+defscrollback 1024
+defsilence off
+defslowpaste 0
+defutf8 on
+defwrap on
+defwritelock off
+altscreen on
+allpartial off
+cjkwidth on
+term screen-256color
+
+# this is annoying, both in clipboard settings and in vim
+defmousetrack off
+
+# disable what we do not need (this can be overwritten by the user)
+deflog off
+defmonitor off
+
+# be restrictive in the pty
+defmode 600
+
+# when the other side blocks wait and then place the screen in block mode
+defnonblock 3
+
+# keep failed processes as zombies (z - kill, x - resurrect)
+defzombie zx onerror
+zombie zx onerror
+
+# detach on hangup
+autodetach on
+
+# case sensitive search
+ignorecase off
+
+# don't display the copyright page, i've read it
+startup_message off
+
+# no annoying audible bell, please
+vbell on
+vbell_msg '!WUFF!'
+vbellwait 3
+
+# seriously, zmodem is old, don't use it
+zmodem off
+
+# use C-x instead of C-a, C-a is used by default by readline,
+# and lockscreen (default for C-x) is not very useful and can be typed in :
+escape ^Xx
+defescape ^Xx
+
+# blanker for idle screen after 6 minutes
+idle 360 blanker
+blankerprg fortune
+
+# give more time to read messages
+msgminwait 3
+msgwait 7
+
+# this gives funny (but possibly cryptic error messages)
+nethack on
+
+# emulate .logout message
+pow_detach_msg 'screen session ended'
+
+# for programs that do not set their hard status (shells often do set it)
+defhstatus "screen: ^En (^Et)"
+
+# allow for multikey bindings
+maptimeout 500
+
+# remove dangerous key bindings
+bind k
+bind ^k
+bind .
+bind ^\
+bind \\
+bind ^h
+bind h
+
+# make them better
+bind K kill
+
+# add some extra bindings in place
+bind k focus up
+bind j focus down
+bind I login on
+bind O login off
+bind } history
+
+# a nice hack: prepend/append register [/] to the paste special
+# (^] instead of ]) and preset, this allows for autoindent in vim
+register [ "\033:set paste\015a"
+register ] "\033:set nopaste\015a"
+bind ^] paste [.]
+
+# captions are most useful in splits, the rest can be places on hardstatus
+caption splitonly
+caption string "%{= KW}[%t (%n)] %h %= [%?%F%{= Kg}FOCUS%{= KW}%:BLUR%?]%{= dd}"
+
+# the hard status on the last line can be used as a caption for non-splits
+hardstatus on
+hardstatus alwayslastline
+hardstatus string '%{=b bW}[%H | %?%EESC%:NORM%? | %t (%n)]%{-b} %Lw%L<%-40=%=%{+b}[load: %l |%c]%{= dd}'
+
+# customise the window list
+windowlist title "%{=b KW}Number | Name (Command)%=[%{= KR}Flags%{-}]%{= dd}"
+windowlist string "%3n    | %t (%{+b}%x%{-})%-10=%=[%f]%{= dd}"
+
+# advertise hardstatus support to $TERMCAP
+# termcapinfo  * '' 'hs:ts=\E_:fs=\E\\:ds=\E_\E\\'
+
+# rxvt alt screen
+terminfo rxvt-unicode 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+
+# old rxvt versions also need this
+# termcapinfo rxvt C8
+
+# the linux terminal definitely needs it
+termcapinfo linux C8
+
+# xterm understands both im/ic and doesn't have a status line.
+# note: do not specify im and ic in the real termcap/info file as
+# some programs (e.g. vi) will not work anymore.
+termcap  xterm hs@:cs=\E[%i%d;%dr:im=\E[4h:ei=\E[4l
+terminfo xterm hs@:cs=\E[%i%p1%d;%p2%dr:im=\E[4h:ei=\E[4l
+
+# 80/132 column switching must be enabled for ^AW to work
+# change init sequence to not switch width
+termcapinfo  xterm Z0=\E[?3h:Z1=\E[?3l:is=\E[r\E[m\E[2J\E[H\E[?7h\E[?1;4;6l
+
+# make the output buffer large for (fast) xterms
+termcapinfo xterm* OL=10000
+
+# tell screen that xterm can switch to dark background and has function keys
+termcapinfo xterm 'VR=\E[?5h:VN=\E[?5l'
+termcapinfo xterm 'k1=\E[11~:k2=\E[12~:k3=\E[13~:k4=\E[14~'
+termcapinfo xterm 'kh=\EOH:kI=\E[2~:kD=\E[3~:kH=\EOF:kP=\E[5~:kN=\E[6~'
+
+# special xterm hardstatus: use the window title
+termcapinfo xterm 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007'
+
+# emulate part of the 'K' charset
+termcapinfo   xterm 'XC=K%,%\E(B,[\304,\\\\\326,]\334,{\344,|\366,}\374,~\337'
+
+# xterm-52 uses background color for delete operations
+termcapinfo xterm* be
+
+# the vt100 description does not mention "dl". *sigh*
+termcap  vt100 dl=5\E[M
+terminfo vt100 dl=5\E[M
+
+# extend the vt100 description by some sequences
+termcap  vt100* ms:AL=\E[%dL:DL=\E[%dM:UP=\E[%dA:DO=\E[%dB:LE=\E[%dD:RI=\E[%dC
+terminfo vt100* ms:AL=\E[%p1%dL:DL=\E[%p1%dM:UP=\E[%p1%dA:DO=\E[%p1%dB:LE=\E[%p1%dD:RI=\E[%p1%dC
+
+# wyse-75-42 must have flow control (xo = "terminal uses xon/xoff")
+# essential to have it here, as this is a slow terminal
+termcapinfo wy75-42 xo:hs@
+
+# new termcap sequences for cursor application mode
+termcapinfo wy* CS=\E[?1h:CE=\E[?1l:vi=\E[?25l:ve=\E[?25h:VR=\E[?5h:VN=\E[?5l:cb=\E[1K:CD=\E[1J
+
+# make hp700 termcap/info better
+termcapinfo  hp700 'Z0=\E[?3h:Z1=\E[?3l:hs:ts=\E[62"p\E[0$~\E[2$~\E[1$}:fs=\E[0}\E[61"p:ds=\E[62"p\E[1$~\E[61"p:ic@'
+

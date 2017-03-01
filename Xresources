@@ -1,4 +1,5 @@
 ! ~/.Xresources - configuration available to Xorg clients
+!    vim: set ft=xdefaults:
 
 ! just in case
 Xft.dpi:        96
@@ -41,10 +42,17 @@ URxvt*scrollTtyKeypress:  true
 URxvt.secondaryScreen:    true
 URxvt.secondaryScroll:    false
 URxvt.perl-ext-common:  default,matcher
-URxvt.url-launcher:     /usr/bin/firefox
+! selects browser based on a BROWSER environment variable
+URxvt.url-launcher:     /home/grochmal/.bin/rc-url-open.sh
+!URxvt.url-launcher:     /usr/bin/firefox
+!URxvt.url-launcher:     /usr/bin/chromium
 !URxvt.url-launcher:     /usr/bin/surf
+!URxvt.url-launcher:     /usr/bin/min
 URxvt.matcher.button:   1
 !URxvt.iconFile:         /usr/share/icons/gnome/scalable/apps/terminal.svg
+! hopefully will not break things (export XMODIFIERS=@im=ibus works better)
+!URxvt.inputMethod: ibus
+!URxvt.preeditType: OverTheSpot
 
 ! colourful man pages
 URxvt.colorIT:  #87af5f
@@ -101,7 +109,7 @@ xscreensaver.fadeTicks:       20
 xscreensaver.splash:          false
 xscreensaver.splashDuration:  0:00:05
 xscreensaver.textMode:     program
-xscreensaver.textLiteral:  XScreenSaver
+xscreensaver.textLiteral:  grochmal.org
 xscreensaver.textFile:     /home/grochmal/.siggrochmal
 xscreensaver.textProgram:  fortune
 xscreensaver.textURL:      http://grochmal.org

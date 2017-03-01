@@ -1,0 +1,168 @@
+-- ~/.xmobarrc - minimalistic status bar configuration
+-- vim: set ft=haskell: --
+Config {
+    -- appearance
+      -- XFT fonts are overrated
+      --font        = "xft:Bitstream Vera Sans Mono:size=9:bold:antialias=true"
+      --font        = "-*-terminus-medium-r-normal-*-*-140-*-*-c-*-*-u"
+      font        = "-*-terminus-medium-r-normal-*-*-120-*-*-c-*-*-u"
+    , bgColor     = "black"
+    , fgColor     = "#e1e1e1"
+    , alpha       = 255
+    , border      = BottomB
+    , borderColor = "#646464"
+    , borderWidth = 1
+    -- layout
+    , sepChar  = "%"   -- delineator between plugin names and straight text
+    , alignSep = "}{"  -- separator between left-right alignment
+    , template = "%multicpu% | <fc=fuchsia>%mytemp%</fc>°C \
+                 \| %memory% | %dynnetwork% | %StdinReader% }{\
+                 \| %battery% | %default:Master% | %date% | %kbd%"
+    -- general behavior
+    , position         = TopW L 100
+    , lowerOnStart     = False   -- send to bottom of window stack on start
+    , hideOnStart      = False   -- start with window unmapped (hidden)
+    , allDesktops      = True    -- show on all desktops
+    -- TODO test this:
+    , overrideRedirect = True    -- set the Override Redirect flag (Xlib)
+    , pickBroadest     = True    -- choose widest display (multi-monitor)
+    , persistent       = True    -- enable/disable hiding (True = disabled)
+
+    -- plugins
+    --   Numbers can be automatically colored according to their value. xmobar
+    --   decides color based on a three-tier/two-cutoff system, controlled by
+    --   command options:
+    --     --Low sets the low cutoff
+    --     --High sets the high cutoff
+    --
+    --     --low sets the color below --Low cutoff
+    --     --normal sets the color between --Low and --High cutoffs
+    --     --High sets the color above --High cutoff
+    --
+    --   full docs at http://projects.haskell.org/xmobar/
+    , commands =
+        -- network activity monitor (dynamic interface resolution)
+        [ Run DynNetwork
+            [ "--template" , "<dev>: <tx>|<rx>"
+            , "--Low"      , "1000"  -- units: kB/s
+            , "--High"     , "5000"  -- units: kB/s
+            , "--low"      , "lime"
+            , "--normal"   , "gold"
+            , "--high"     , "fuchsia"
+            , "--suffix"   , "True"
+            , "--minwidth" , "7"  -- enough for `nnnMB/s`
+            ] 10
+        -- volume control, using mouse wheel ('tis madness uses too much CPU)
+        --, Run Volume "default" "Master"
+        --    ["--template"
+        --    , "<action=`urxvt -e alsamixer` button=1>Vol:</action> \
+        --      \<action=`amixer sset Master 10%+ >/dev/null` button=4>\
+        --        \<action=`amixer sset Master 10%- >/dev/null` button=5>\
+        --          \<volume>%\
+        --        \</action>\
+        --      \</action> \
+        --      \<action=`amixer sset Master mute >/dev/null` button=1>\
+        --        \<action=`amixer sset Master unmute >/dev/null` button=3>\
+        --          \<status>\
+        --        \</action>\
+        --      \</action>"
+        --    , "--Low"      , "40"
+        --    , "--High"     , "70"
+        --    , "--low"      , "lime"
+        --    , "--normal"   , "gold"
+        --    , "--high"     , "fuchsia"
+        --    , "--ppad"     , "3"
+        --    , "--"  -- volume specific options
+        --        , "--on"   , "ON "
+        --        , "--off"  , "OFF"
+        --        , "--onc"  , "lime"
+        --        , "--offc" , "fuchsia"
+        --    ] 10
+        -- less mad volume control
+        , Run Volume "default" "Master"
+            ["--template"
+            , "<action=`urxvt -e alsamixer`>Vol:<volume>% <status></action>"
+            , "--Low"      , "40"
+            , "--High"     , "70"
+            , "--low"      , "lime"
+            , "--normal"   , "gold"
+            , "--high"     , "fuchsia"
+            , "--ppad"     , "3"
+            , "--"  -- volume specific options
+                , "--on"   , "ON "
+                , "--off"  , "OFF"
+                , "--onc"  , "lime"
+                , "--offc" , "fuchsia"
+            ] 10
+        -- cpu activity monitor
+        , Run MultiCpu
+            [ "--template"
+            , "<action=`urxvt -e htop`>Cpu:<total0>|<total1></action>"
+            , "--Low"      , "50"  -- units: %
+            , "--High"     , "85"  -- units: %
+            , "--low"      , "lime"
+            , "--normal"   , "gold"
+            , "--high"     , "fuchsia"
+            , "--suffix"   , "True"
+            , "--ppad"     , "3"
+            ] 10
+        -- cpu core temperature monitor (often works badly)
+        --, Run CoreTemp
+        --    [ "--template" , "Temp: <core0>°C|<core1>°C"
+        --    , "--Low"      , "70"  -- units: °C
+        --    , "--High"     , "80"  -- units: °C
+        --    , "--low"      , "darkgreen"
+        --    , "--normal"   , "darkorange"
+        --    , "--high"     , "darkred"
+        --    ] 50
+        -- hack to make a temperature sensor by hand
+        , Run Com "awk"
+            [ "{printf \"%5.1f\", $0/1000.0}"
+            , "/sys/class/thermal/thermal_zone0/temp"
+            -- other possibilities for temperature files
+            --, "/sys/devices/virtual/thermal/thermal_zone0/temp"
+            ] "mytemp" 10
+        -- memory usage monitor
+        , Run Memory
+            [ "--template"
+            , "<action=`urxvt -e htop`>Mem:<usedratio></action>"
+            , "--Low"      , "30"  -- units: %
+            , "--High"     , "90"  -- units: %
+            , "--low"      , "lime"
+            , "--normal"   , "gold"
+            , "--high"     , "fuchsia"
+            , "--suffix"   , "True"
+            , "--ppad"     , "3"
+            ] 10
+        -- battery monitor
+        , Run Battery
+            [ "--template" , "Batt: <acstatus> (<watts>)"
+            , "--Low"      , "10"  -- units: Watts
+            , "--High"     , "12"  -- units: Watts
+            , "--high"     , "lime"
+            , "--normal"   , "gold"
+            , "--low"      , "fuchsia"
+            , "--ppad"     , "3"
+            , "--suffix"   , "True"
+            , "--"  -- battery specific options
+                , "-o", "<fc=gold><left> left</fc>"  -- discharging status
+                , "-O", "<fc=lime>on AC</fc>"        -- AC "on" status
+                , "-i", "<fc=lime>charged</fc>"      -- charged status
+                , "-f", "AC0/online"                 -- AC adapter location
+            ] 50
+        -- time and date indicator
+        --   (%F = y-m-d date, %a = day of week, %T = h:m:s time)
+        , Run Date "<fc=aquamarine>%F (%a) %T</fc>" "date" 10
+        -- keyboard layout indicator
+        , Run Kbd
+            [ ( "us" , "<fc=aqua>US</fc>"       )
+            , ( "gb" , "<fc=aquamarine>GB</fc>" )
+            , ( "pl" , "<fc=mintcream>PL</fc>"  )
+            , ( "br" , "<fc=chartreuse>BR</fc>" )
+            , ( "jp" , "<fc=fuchsia>JP</fc>"    )
+            ]
+        -- allow xmonad to tell us the current workspace and window
+        , Run StdinReader
+        ]
+}
+

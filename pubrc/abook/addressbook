@@ -1,4 +1,5 @@
 # abook addressbook file
+#    vim: set ft=dosini:
 
 [format]
 program=abook

@@ -1,4 +1,5 @@
 # .muttrc/.mutt-alias - email aliases for mutt
+#    vim: set ft=muttrc:
 
 alias uk-qmul-dude Some Dude <some.dude@qmul.ac.uk>
 alias party-some-dude Another Dude <anther.dude@hotmail.com>

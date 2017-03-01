@@ -1,4 +1,5 @@
 # .procmail - filters email into different inboxes
+#    vim: set ft=procmail:
 SHELL=/bin/sh
 MAILDIR=$HOME/mail
 DEFAULT=my-inbox
