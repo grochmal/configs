@@ -1,0 +1,14 @@
+#!/bin/sh
+#    vim: set ft=sh:
+
+if test "x$DISPLAY" != "x"
+then
+    echo -n 'xhost: '
+    xhost +local:root
+    su "$@" -c "DISPLAY=$DISPLAY $SHELL" root
+    echo -n 'xhost: '
+    xhost -local:root
+else
+    su "$@" root
+fi
+
