@@ -41,6 +41,19 @@ export LESS='-iMSx4 -FXR'
 alias 'ls=ls --color=auto'
 alias 'rmpy=find . -depth -type d -name __pycache__ -exec rm -rf {} \;'
 
+# Centos, Fedora and RedHat mess up the Vim installation
+centos=/etc/centos-release
+fedora=/etc/fedora-release
+redhat=/etc/redhat-release
+if test -r "$centos" -o -r "$redhat" -o -r "$fedora"
+then
+    alias 'vim=gvim -v'
+    export EDITOR='gvim -v'
+fi
+unset centos
+unset fedora
+unset redhat
+
 # metasploit (favourite place for the db config)
 export MSF_DATABASE_CONFIG=/opt/metasploit/config/database.yml
 
