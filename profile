@@ -39,7 +39,11 @@ export LESS='-iMSx4 -FXR'
 
 # useful things
 alias 'ls=ls --color=auto'
+# removes the python 3 caches
 alias 'rmpy=find . -depth -type d -name __pycache__ -exec rm -rf {} \;'
+
+# runs a python module from the directory below it, uses __main__.py
+runpymod () { (bname=$(basename $(pwd)); cd ..; python -m "$bname" "$@"); };
 
 # Centos, Fedora and RedHat mess up the Vim installation
 centos=/etc/centos-release
