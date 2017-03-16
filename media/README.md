@@ -491,12 +491,12 @@ Therefore a decent way to convert books and papers should be
 
 or simply
 
-    gs -q -dBATCH -dNOPAUSE -sDEVICE=pdfwrite \
-       -dPDFSETTINGS=/ebook -sOutputFile=out.pdf in.pdf
+    gs -q -dBATCH -dNOPAUSE -sDEVICE=pdfwrite -sOutputFile=out.pdf in.pdf
 
 For files that do use the extra PDF functionality.  Adding
 `-dCompatibilityLevel=1.4` makes the file readable to many ebook readers yet it
-may increase the size of a file considerably.
+may increase the size of a file considerably.  And `-dPDFSETTINGS=` can also be
+taken from the original PDF to save computations (no need to rescale).
 
 ### Naming convention
 
@@ -517,11 +517,11 @@ For example
 
 And name a paper as
 
-    author~title.pdf
+    title~authorYEAR.pdf
 
-For example
+This allows for searching cross references in bibliography, for example
 
-    avgerinos~automatic-exploit-generation.pdf
+    automatic-exploit-generation~avgerinos2011.pdf
 
 Organisation of books and papers into directories is a matter or topic
 organisation.  The understanding of how to divide topics between themselves is

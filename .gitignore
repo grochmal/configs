@@ -15,6 +15,7 @@
 
 # xmonad cache
 /xmonad/xmonad.errors
+/xmonad/xmonad.state
 /xmonad/xmonad.hi
 /xmonad/xmonad.o
 /xmonad/xmonad-*-linux

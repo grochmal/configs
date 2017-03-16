@@ -41,6 +41,8 @@ export LESS='-iMSx4 -FXR'
 alias 'ls=ls --color=auto'
 # removes the python 3 caches
 alias 'rmpy=find . -depth -type d -name __pycache__ -exec rm -rf {} \;'
+# greps for non-ascii
+alias "gnascii=grep -aP '[^\x00-\x7F]'"
 
 # runs a python module from the directory below it, uses __main__.py
 runpymod () { (bname=$(basename $(pwd)); cd ..; python -m "$bname" "$@"); };

@@ -5,7 +5,7 @@
 # that limit we will need to add more rules.
 LINKS = profile bashrc bash_profile\
         dir_colors mailcap screenrc\
-        xinitrc xsession Xresources Xmodmap xmobarrc\
+        xinitrc xsession Xresources Xmodmap xmobarrc stalonetrayrc\
         bin xmonad weechat
         # vifm
 # TODO

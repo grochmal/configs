@@ -48,16 +48,23 @@ then
 fi
 unset feh
 
-ibusd=`which ibus-daemon 2>/dev/null`
-if test "x$ibusd" != "x" -a -x "$ibusd"
-then
-    "$ibusd" --daemonize --xim --desktop=xmonad
-fi
-
 # pulse audio for alsa
 if test -x /usr/bin/start-pulseaudio-x11
 then
     /usr/bin/start-pulseaudio-x11
+fi
+
+# IBUS working from a tray (this breaks sometimes)
+ibusd=`which ibus-daemon 2>/dev/null`
+if test "x$ibusd" != "x" -a -x "$ibusd"
+then
+    "$ibusd" --daemonize --xim --desktop=xmonad
+    export XMODIFIERS=@im=ibus
+fi
+stalone=`which stalonetray 2>/dev/null`
+if test "x$stalone" != "x" -a -x "$stalone"
+then
+    "$stalone" &
 fi
 
 # exec gnome-session

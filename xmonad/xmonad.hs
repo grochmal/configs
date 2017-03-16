@@ -49,6 +49,12 @@ main = do
       , ((mod4Mask, xK_b)               , sendMessage ToggleStruts)
       ]
 
+--startup :: X ()
+--startup = do
+          --setWMName "LG3D"
+          -- works better from .xinitrc
+          --spawn "stalonetray"
+
 scrotWindow     = "sleep 1; scrot -s ~/%Y-%m-%s-%T-screenshot.png"
 scrotFullscreen = "scrot ~/%Y-%m-%d-%T-screenshot.png"
 screenLock      = "xscreensaver-command -lock"
