@@ -4,7 +4,7 @@
 # 4096 bytes.  That's about 50 lines of 80 characters each, if we are close to
 # that limit we will need to add more rules.
 LINKS = profile bashrc bash_profile\
-        dir_colors mailcap screenrc\
+        dir_colors mailcap screenrc gdbinit\
         xinitrc xsession Xresources Xmodmap xmobarrc stalonetrayrc\
         bin xmonad weechat
         # vifm

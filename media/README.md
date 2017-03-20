@@ -483,6 +483,14 @@ or a few bookmarks
     [ /Page 6 /View [/FitH 220] /Title (The third thing) /OUT pdfmark
     [ /PageMode /UseOutlines /DOCVIEW pdfmark
 
+Also, ghostscript tries to guess page orientation from the text on it.  It
+performs the orientation of each page in this manner but we can force a
+different behaviour:
+
+    -dAutoRotatePages=/None        # don't try to rotate any page
+    -dAutoRotatePages=/All         # rotate all pages according to the majority
+    -dAutoRotatePages=/PageByPage  # the default
+
 Therefore a decent way to convert books and papers should be
 
     gs -q -dBATCH -dNOPAUSE -sDEVICE=pdfwrite \
