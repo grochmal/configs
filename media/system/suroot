@@ -1,7 +1,14 @@
 #!/bin/sh
 #    vim: set ft=sh:
+# Add Xorg access to the root shell when under a user Xorg session
 
-if test "x$DISPLAY" != "x"
+# If there is a DISPLAY then this is some kind of xterm, therefore we can
+# assume that we do have `xhost`.  And if DISPLAY starts with ':' (e.g. :0 or
+# :1) then we are on the same machine as is running the Xorg server.  If we are
+# on some remote machine (and therefore DISPLAY starts with a server name) then
+# we do not need to add root to the list because the credentials used will be
+# the one from the connection.
+if test "x$DISPLAY" != "x" -a "x${DISPLAY:0:1}" = "x:"
 then
     echo -n 'xhost: '
     xhost +local:root
