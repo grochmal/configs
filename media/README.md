@@ -384,9 +384,12 @@ standard and has no other usage than to waste disk space.
 
 ### Postscript
 
-The Postscript standard is the predecessor of PDF, PDF can do everything that
-can be achieved in Postscript and more.  Often PDF has a better compression.
-There is not reason to keep books or papers in the Postscript format.
+The Postscript standard is the predecessor of PDF, PDF can do (almost)
+everything that can be achieved in Postscript and more.  The reason that
+Postscript can do more is that it is an unbound programming language, which in
+turn, is dangerous for media files.  Often PDF has a better compression too,
+thanks to bitmap handling.  There is no reason to keep books or papers in the
+Postscript format.
 
 ### Epub
 
@@ -406,7 +409,7 @@ plethora of options is easy to remember after a couple of uses.
 
 A good start with ghostscript is [Milan Kupcevic's article][mkgs], below i have
 a summary and a couple of common commands but the article itself is better
-written.
+written in several parts.
 
 [mkgs]: http://milan.kupcevic.net/ghostscript-ps-pdf/
 
@@ -441,11 +444,10 @@ And here is a list of extra options from Kupcevic's article
     # other options (including defaults)
     -dEmbedAllFonts=true
     -dSubsetFonts=false
-    -dFirstPage=pagenumber
-    -dLastPage=pagenumber
-    -dAutoRotatePages=/PageByPage
-    -dAutoRotatePages=/All
-    -dAutoRotatePages=/None
+
+    -dFirstPage=<pagenumber>
+    -dLastPage=<pagenumber>
+
     -dCompatibilityLevel=1.4
     -r1200 (resolution for pattern fills and fonts converted to bitmaps)
     -sPDFPassword=password
@@ -483,6 +485,8 @@ or a few bookmarks
     [ /Page 6 /View [/FitH 220] /Title (The third thing) /OUT pdfmark
     [ /PageMode /UseOutlines /DOCVIEW pdfmark
 
+#### Page Orientation
+
 Also, ghostscript tries to guess page orientation from the text on it.  It
 performs the orientation of each page in this manner but we can force a
 different behaviour:
@@ -491,17 +495,41 @@ different behaviour:
     -dAutoRotatePages=/All         # rotate all pages according to the majority
     -dAutoRotatePages=/PageByPage  # the default
 
-Therefore a decent way to convert books and papers should be
+#### Background images
+
+Another corner case is where a book has bitmaps as background images for each
+page.  This is different from a book where the pages are bitmaps (e.g. a scan
+which has not been OCRed, in which case the file should have never been bundled
+as a PDF).  A page that has text over a background image uses little disk space
+for the text and a lot of space for the background, which is often not needed.
+We can tell ghostscript to downsample the images whilst keeping the DPI of the
+entire book fixed.  For example:
+
+    -dDownsampleColorImages=true
+    -dDownsampleGrayImages=true
+    -dDownsampleMonoImages=true
+    -dColorImageResolution=60
+    -dGrayImageResolution=60
+    -dMonoImageResolution=60
+
+Will downsample all images (all three types of images) to 60 PPI (pixels per
+inch).  The minimum size allowed is 2 PPI but something along the lines of
+30-70 PPI should be enough for most books.
+
+#### General conversion
+
+Therefore (looking at the options above) a decent way to convert books and
+papers should be
 
     gs -q -dBATCH -dNOPAUSE -sDEVICE=pdfwrite \
        -dPDFSETTINGS=/printer -dCompatibilityLevel=1.4 \
        -sOutputFile=out.pdf in.pdf
 
-or simply
+or simply (`-o` is a synonym of `-sOutputFile` for `pdfwrite`)
 
-    gs -q -dBATCH -dNOPAUSE -sDEVICE=pdfwrite -sOutputFile=out.pdf in.pdf
+    gs -q -dBATCH -dNOPAUSE -sDEVICE=pdfwrite -o out.pdf in.pdf
 
-For files that do use the extra PDF functionality.  Adding
+for files that do use the extra PDF functionality.  Adding
 `-dCompatibilityLevel=1.4` makes the file readable to many ebook readers yet it
 may increase the size of a file considerably.  And `-dPDFSETTINGS=` can also be
 taken from the original PDF to save computations (no need to rescale).

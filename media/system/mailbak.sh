@@ -1,7 +1,9 @@
 #!/bin/sh
 #
 # Backup of emails and addressbook, all arguments are optional but have
-# sensible defaults:
+# sensible defaults.  Since `tar` is not very clever about paths we use
+# `realpath` which is not POSIX compatible.  You need to install `realpath` if
+# you do not have it.
 #
 # Usage mailback.sh [backup-dir] [mail-dir] [abook-file]"
 #
@@ -9,26 +11,31 @@
 # mail-dir in ~/mail
 # abook-file in ~/.abook/addressbook
 
-DATE=`date +'%Y%m%d'`
-BAKDIR=${1:-"$HOME/mailbak"}
+date_bak=`date +'%Y%m%d'`
+bak_dir=${1:-"$HOME/mailbak"}
 if test "x" != "x$MAIL"
 then
-    MAILBASE=`dirname $MAIL`
-    MAILDIR=${2:-"$MAILBASE"}
+    mail_base=`dirname "$MAIL"`
+    mail_dir=${2:-"$mail_base"}
 else
-    MAILDIR=${2:-"$HOME/mail"}
+    mail_dir=${2:-"$HOME/mail"}
 fi
-ABOOK=${3:-"$HOME/.abook/addressbook"}
+tar_base=`dirname "$mail_dir"`
+abook=${3:-"$HOME/.abook/addressbook"}
 
-if test ! -d "$BAKDIR"
+if test ! -d "$bak_dir"
 then
-    echo "mkdir -p \"$BAKDIR\""
-    mkdir -p "$BAKDIR"
+    echo "mkdir -p \"$bak_dir\""
+    mkdir -p "$bak_dir"
 fi
-BAKFILE="$BAKDIR/mailbak-${DATE}.tar.gz"
+bak_file="$bak_dir/mailbak-${date_bak}.tar.gz"
 
-echo "Backing up [$MAILDIR & $ABOOK] => $BAKFILE"
+# now prepare the directorie for tar (leave symlinks unexpanded)
+tar_mail=`realpath --no-symlinks --relative-to="$tar_base" "$mail_dir"`
+tar_abook=`realpath --no-symlinks --relative-to="$tar_base" "$abook"`
 
-echo "tar cvzf \"$BAKFILE\" \"$MAILDIR\" \"$ABOOK\""
-tar cvzf "$BAKFILE" "$MAILDIR" "$ABOOK"
+echo "Backing up [ $mail_dir && $abook ] => $bak_file"
+
+echo "tar -cvz -C \"$tar_base\" -f \"$bak_file\" \"$tar_mail\" \"$tar_abook\""
+tar -cvz -C "$tar_base" -f "$bak_file" "$tar_mail" "$tar_abook"
 
