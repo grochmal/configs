@@ -30,7 +30,7 @@ then
 fi
 bak_file="$bak_dir/mailbak-${date_bak}.tar.gz"
 
-# now prepare the directorie for tar (leave symlinks unexpanded)
+# now prepare the directories for tar (leave symlinks unexpanded)
 tar_mail=`realpath --no-symlinks --relative-to="$tar_base" "$mail_dir"`
 tar_abook=`realpath --no-symlinks --relative-to="$tar_base" "$abook"`
 

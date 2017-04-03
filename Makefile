@@ -13,6 +13,7 @@ XDG   = zathura
 ENC   = procmailrc fetchmailrc muttrc\
         siggrochmal sigvalentine sigwork\
         abook ssh
+ENCND = notes
 HIST  = bash_history lesshst viminfo\
         wget-hsts
 # TODO
@@ -34,6 +35,10 @@ links:
 	for enc in $(ENC); do \
 	    echo ln -fns ~/rc/rc/$${enc} ~/.$${enc}; \
 	    ln -fns ~/rc/rc/$${enc} ~/.$${enc}; \
+	done
+	for enc in $(ENCND); do \
+	    echo ln -fns ~/rc/rc/$${enc} ~/$${enc}; \
+	    ln -fns ~/rc/rc/$${enc} ~/$${enc}; \
 	done
 	if ! test -d ~/.config; then \
 	    echo mkdir ~/.config; \
@@ -61,6 +66,12 @@ clean:
 	    if test -L  ~/.$${enc}; then \
 	        echo rm -f ~/.$${enc}; \
 	        rm -f ~/.$${enc}; \
+	    fi; \
+	done
+	for enc in $(ENCND); do \
+	    if test -L  ~/$${enc}; then \
+	        echo rm -f ~/$${enc}; \
+	        rm -f ~/$${enc}; \
 	    fi; \
 	done
 	for hist in $(HIST); do \
