@@ -63,3 +63,7 @@ unset redhat
 # metasploit (favourite place for the db config)
 export MSF_DATABASE_CONFIG=/opt/metasploit/config/database.yml
 
+conda_start () {
+    export PATH="/home/grochmal/anaconda3/bin:$PATH"
+}
+

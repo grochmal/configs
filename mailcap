@@ -1,7 +1,7 @@
 # .mailcap - metamail capabilities
 #    vim: set ft=mailcap:
 
-text/html;        lynx -assume_charset=%{charset} -display_charset=utf-8 -dump %s; nametemplate=%s.html; copiousoutput
+text/html;        lynx -assume_charset=%{charset} -width=1024  -display_charset=utf-8 -dump %s; nametemplate=%s.html; copiousoutput
 application/pdf;  pdftotext %s - ; copiousoutput
 image/*;          anytopnm %s | pnmscale -xsize 80 | ppmtopgm | pgmtopbm | pbmtoascii ; copiousoutput
 #multipart/alternative;  more %s ; copiousoutput
